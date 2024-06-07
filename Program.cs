@@ -1,4 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using warehouse.Contexts;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<WarehouseDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WarehouseDatabase"));
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
