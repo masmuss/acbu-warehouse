@@ -11,4 +11,7 @@ public class Invoice
     public Shipping Shipping { get; set; }
 
     public string InvoiceCode { get; set; }
+    
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }

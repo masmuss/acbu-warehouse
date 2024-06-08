@@ -22,4 +22,7 @@ public class Shipping
     public ICollection<Invoice> Invoices { get; set; }
     public ICollection<SalesDocument> SalesDocuments { get; set; }
     public ICollection<Product> Products { get; set; }
+    
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }

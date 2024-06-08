@@ -16,4 +16,7 @@ public class LoadingScan
     public string SerialNumber { get; set; }
     public int Actual { get; set; } // scan
     public int Plan { get; set; } // refer actual preparation
+    
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }

@@ -23,4 +23,7 @@ public class Product
     public double GwTotal { get; set; }
     public double M3L { get; set; }
     public double M3Total { get; set; }
+    
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }

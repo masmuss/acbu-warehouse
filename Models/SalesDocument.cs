@@ -11,4 +11,7 @@ public class SalesDocument
     public Shipping Shipping { get; set; }
 
     public string SalesDocumentCode { get; set; }
+    
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }

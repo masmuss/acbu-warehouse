@@ -16,4 +16,7 @@ public class PreparationScan
     public int Plan { get; set; } // akumulasi plan produk
 
     public LoadingScan LoadingScans { get; set; }
+    
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }
