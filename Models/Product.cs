@@ -15,7 +15,8 @@ public class Product
     public string Po { get; set; }
     public string Model { get; set; }
     public string Packing { get; set; }
-    public int QtyTotal { get; set; }
+    public int QtyPlan { get; set; }
+    public int QtyActual { get; set; }
     public double NwPack { get; set; }
     public double NwTotal { get; set; }
     public double GwPack { get; set; }

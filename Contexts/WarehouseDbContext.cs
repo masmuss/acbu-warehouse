@@ -9,6 +9,8 @@ public class WarehouseDbContext(DbContextOptions<WarehouseDbContext> options) : 
     public DbSet<Invoice> Invoices { get; set; }
     public DbSet<SalesDocument> SalesDocuments { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<PreparationScan> PreparationScans { get; set; }
+    public DbSet<LoadingScan> LoadingScans {get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,5 +28,10 @@ public class WarehouseDbContext(DbContextOptions<WarehouseDbContext> options) : 
             .HasMany(s => s.Products)
             .WithOne(p => p.Shipping)
             .HasForeignKey(p => p.ShippingId);
+        
+        modelBuilder.Entity<PreparationScan>()
+            .HasOne(ps => ps.LoadingScans)
+            .WithOne(ls => ls.PreparationScan)
+            .HasForeignKey<LoadingScan>(ls => ls.PreparationId);
     }
 }

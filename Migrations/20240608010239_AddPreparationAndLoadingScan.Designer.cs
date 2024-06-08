@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using warehouse.Contexts;
 
@@ -11,9 +12,11 @@ using warehouse.Contexts;
 namespace warehouse.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    partial class WarehouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240608010239_AddPreparationAndLoadingScan")]
+    partial class AddPreparationAndLoadingScan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,96 +45,6 @@ namespace warehouse.Migrations
                     b.HasIndex("ShippingId");
 
                     b.ToTable("Invoices");
-                });
-
-            modelBuilder.Entity("warehouse.Models.LoadingScan", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Actual")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ContainerNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Destination")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Do")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Drl")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Plan")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PreparationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SerialNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PreparationId")
-                        .IsUnique();
-
-                    b.ToTable("LoadingScans");
-                });
-
-            modelBuilder.Entity("warehouse.Models.PreparationScan", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Actual")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ContainerNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Destination")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Do")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Drl")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Plan")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SerialNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PreparationScans");
                 });
 
             modelBuilder.Entity("warehouse.Models.Product", b =>
@@ -264,17 +177,6 @@ namespace warehouse.Migrations
                     b.Navigation("Shipping");
                 });
 
-            modelBuilder.Entity("warehouse.Models.LoadingScan", b =>
-                {
-                    b.HasOne("warehouse.Models.PreparationScan", "PreparationScan")
-                        .WithOne("LoadingScans")
-                        .HasForeignKey("warehouse.Models.LoadingScan", "PreparationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PreparationScan");
-                });
-
             modelBuilder.Entity("warehouse.Models.Product", b =>
                 {
                     b.HasOne("warehouse.Models.Shipping", "Shipping")
@@ -295,12 +197,6 @@ namespace warehouse.Migrations
                         .IsRequired();
 
                     b.Navigation("Shipping");
-                });
-
-            modelBuilder.Entity("warehouse.Models.PreparationScan", b =>
-                {
-                    b.Navigation("LoadingScans")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("warehouse.Models.Shipping", b =>
