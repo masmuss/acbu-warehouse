@@ -1,0 +1,33 @@
+@model string
+
+<div class="card">
+    <div class="card-header text-center fw-bold">
+        @Model
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <tr class="text-center">
+                <th rowspan="2" class="align-middle">D/O</th>
+                <th rowspan="2" class="align-middle">Container Number</th>
+                <th rowspan="2" class="align-middle">Model</th>
+                <th rowspan="2" class="align-middle">Destination</th>
+                <th colspan="2">Qty</th>
+            </tr>
+            <tr class="text-center">
+                <th>Plan</th>
+                <th>Actual</th>
+            </tr>
+            <tr>
+                <td>Widget</td>
+                <td>$10.00</td>
+                <td>$10.00</td>
+                <td>Wkwkwland</td>
+                <td class="text-center">0</td>
+                <td class="text-center">90</td>
+            </tr>
+        </table>
+    </div>
+</div>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@

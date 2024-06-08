@@ -1,0 +1,197 @@
+@model warehouse.Models.Dto.CreateShippingView
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<form asp-action="Create">
+    <div class="row mb-3">
+        <div class="col-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row g-3 align-items-start align-content-between mb-3">
+                <div class="col-4">
+                    <label asp-for="BookingConfirmation" class="col-form-label">Booking Confirmation</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="BookingConfirmation" class="form-control w-100"/>
+                    <span asp-validation-for="BookingConfirmation" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row g-3 align-items-start align-content-between mb-3">
+                <div class="col-4">
+                    <label asp-for="ActualShipment" class="col-form-label">Actual Shipping</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="ActualShipment" type="date" class="form-control w-100"/>
+                    <span asp-validation-for="ActualShipment" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row g-3 align-items-start align-content-between mb-3">
+                <div class="col-4">
+                    <label asp-for="CargoReady" class="col-form-label">Cargo Ready</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="CargoReady" type="date" class="form-control w-100"/>
+                    <span asp-validation-for="CargoReady" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row g-3 align-items-start align-content-between mb-3">
+                <div class="col-4">
+                    <label asp-for="ContNo" class="col-form-label">Container No</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="ContNo" class="form-control w-100"/>
+                    <span asp-validation-for="ContNo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row g-3 align-items-start align-content-between mb-3">
+                <div class="col-4">
+                    <label asp-for="SealNo" class="col-form-label">Seal No</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="SealNo" class="form-control w-100"/>
+                    <span asp-validation-for="SealNo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row g-3 align-items-start align-content-between mb-3">
+                <div class="col-4">
+                    <label asp-for="Destination" class="col-form-label">Destination</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="Destination" class="form-control w-100"/>
+                    <span asp-validation-for="Destination" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-11">
+            <label asp-for="InvoiceCodes" class="form-label">No. Invoice</label>
+            <span class="form-text fst-italic">*if more than one item, please separate with comma</span>
+            <input asp-for="InvoiceCodes" type="text" class="form-control w-100" placeholder="3000xxxxxx">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-11">
+            <label asp-for="SalesDocumentCodes" class="form-label">Sales Document</label>
+            <span class="form-text fst-italic">*if more than one item, please separate with comma</span>
+            <input asp-for="SalesDocumentCodes" type="text" class="form-control w-100" placeholder="1000xxxxxx">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center w-100 mb-3">
+                <h4>Product list</h4>
+                <button type="button" class="btn btn-primary ms-auto" id="addProduct">Add Product</button>
+            </div>
+            <table class="table table-bordered">
+                <thead class="text-center align-middle">
+                <tr>
+                    <td colspan="2">Container</td>
+                    <td rowspan="2">PO
+                    <td rowspan="2">Model</td>
+                    <td>Packing</td>
+                    <td>Qty</td>
+                    <td colspan="2">NW</td>
+                    <td colspan="2">GW</td>
+                    <td colspan="2">M3</td>
+                </tr>
+                <tr>
+                    <td>Size</td>
+                    <td>Q</td>
+                    <td>Packing</td>
+                    <td>Total</td>
+                    <td>/Pack</td>
+                    <td>Total</td>
+                    <td>/Pack</td>
+                    <td>Total</td>
+                    <td>L</td>
+                    <td>Total</td>
+                </tr>
+                </thead>
+                <tbody id="productsTableBody">
+                @for (var i = 0; i < Model.Products.LongCount(); i++)
+                {
+                    <tr>
+                        <td>
+                            <input asp-for="@Model.Products[i].ContainerSize" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].ContainerQ" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].Po" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].Model" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].Packing" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].QtyPlan" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].NwPack" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].NwTotal" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].GwPack" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].GwTotal" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].M3L" class="form-control"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Products[i].M3Total" class="form-control"/>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end align-items-center gap-3">
+        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Create" class="btn btn-primary"/>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        document.getElementById("addProduct").addEventListener("click", function () {
+            let index = document.querySelectorAll("#productsTableBody tr").length;
+            let template = `
+                    <tr>
+                        <td><input name="Products[${index}].ContainerSize" class="form-control" /></td>
+                        <td><input name="Products[${index}].ContainerQ" class="form-control" /></td>
+                        <td><input name="Products[${index}].Po" class="form-control" /></td>
+                        <td><input name="Products[${index}].Model" class="form-control" /></td>
+                        <td><input name="Products[${index}].Packing" class="form-control" /></td>
+                        <td><input name="Products[${index}].QtyPlan" class="form-control" /></td>
+                        <td><input name="Products[${index}].NwPack" class="form-control" /></td>
+                        <td><input name="Products[${index}].NwTotal" class="form-control" /></td>
+                        <td><input name="Products[${index}].GwPack" class="form-control" /></td>
+                        <td><input name="Products[${index}].GwTotal" class="form-control" /></td>
+                        <td><input name="Products[${index}].M3L" class="form-control" /></td>
+                        <td><input name="Products[${index}].M3Total" class="form-control" /></td>
+                    </tr>`;
+            document.getElementById("productsTableBody").insertAdjacentHTML('beforeend', template);
+        });
+    </script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
